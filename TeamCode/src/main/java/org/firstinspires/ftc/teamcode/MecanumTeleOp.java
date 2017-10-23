@@ -42,7 +42,7 @@ public class MecanumTeleOp extends LinearOpMode {
                 rightBack.setPower(-gamepad1.right_stick_x);
                 leftFront.setPower(gamepad1.right_stick_x);
                 leftBack.setPower(gamepad1.right_stick_x);
-            }
+            }//fjdkafpojdia
 */
             moveMecanum(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
 
