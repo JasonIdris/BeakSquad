@@ -70,4 +70,9 @@ public class MecanumTeleOp extends LinearOpMode {
         rightBack.setPower(java.lang.Math.abs(RearRight) > DEADZONE ? RearRight : 0);
     }
 
+    /*
+    Jason is building some mecanum methods here. Sooooooo I call this job.
+     */
+
+
 }
