@@ -1,3 +1,8 @@
+## Test (DO NOT RM YET)
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/Kq6Sn61hju7cqQu5xbQPq1eN/JasonIdris/BeakSquad'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/Kq6Sn61hju7cqQu5xbQPq1eN/JasonIdris/BeakSquad.svg' />
+</a>
+
 ## Welcome!
 This GitHub repository contains the source code that is used to build an Android app to control a *FIRST* Tech Challenge competition robot.  To use this SDK, download/clone the entire project to your local computer.
 
@@ -82,14 +87,14 @@ Changes with verion 3.3 include:
     - Sample op modes can be selected as a template when creating new op mode.
     - Fixes and changes to complete hardware setup feature.
     - Updated (and more useful) onBot welcome message.
-    
+
 Known issues:
  * Android Studio
     - After updating to the new v3.3 Android Studio project folder, if you get error messages indicating "InvalidVirtualFileAccessException" then you might need to do a File->Invalidate Caches / Restart to clear the error.
 
  * OnBot Java
     - Sometimes when you push the build button to build all op modes, the RC returns an error message that the build failed.  If you press the build button a second time, the build typically suceeds.
-    
+
 **************************************************************************************
 
 Version 3.2 (built on 17.08.02)
