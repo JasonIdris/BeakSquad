@@ -1,4 +1,3 @@
-## Test (DO NOT RM YET)
 <a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/Kq6Sn61hju7cqQu5xbQPq1eN/JasonIdris/BeakSquad'>
   <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/Kq6Sn61hju7cqQu5xbQPq1eN/JasonIdris/BeakSquad.svg' />
 </a>
