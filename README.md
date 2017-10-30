@@ -1,9 +1,3 @@
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/Kq6Sn61hju7cqQu5xbQPq1eN/JasonIdris/BeakSquad'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/Kq6Sn61hju7cqQu5xbQPq1eN/JasonIdris/BeakSquad.svg' />
-</a>
-
-If you see a big white space above this, everything is fine.
-
 ## Welcome!
 This GitHub repository contains the source code that is used to build an Android app to control a *FIRST* Tech Challenge competition robot.  To use this SDK, download/clone the entire project to your local computer.
 
