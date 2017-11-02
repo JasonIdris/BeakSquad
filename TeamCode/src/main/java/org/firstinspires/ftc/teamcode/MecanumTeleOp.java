@@ -68,8 +68,9 @@ public class MecanumTeleOp extends LinearOpMode {
         leftBack.setPower(java.lang.Math.abs(RearLeft) > DEADZONE ? RearLeft : 0);
         rightFront.setPower(java.lang.Math.abs(FrontRight) > DEADZONE ? FrontRight : 0);
         rightBack.setPower(java.lang.Math.abs(RearRight) > DEADZONE ? RearRight : 0);
-    }
 
+        // moar commit
+    }
 
 
 }
