@@ -38,7 +38,7 @@ public class GhastineMecanumTeleOp extends OpMode {
         rightFrontWheel = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
         rightBackWheel = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
         leftFrontWheel.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftBackWheel.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFrontWheel.setDirection(DcMotorSimple.Direction.REVERSE);
         //double volts = hardwareMap.voltageSensor.get("MOtor Controller 1").getVoltage();
 
     }
