@@ -1,17 +1,17 @@
-package org.firstinspires.ftc.teamcode;
-
-
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
-import java.util.Arrays;
-
-
-/**
- * Created by eharwood on 10/2/17.
- *
+package org.firstinspires.ftc.teamcode;                                  
+                                                                         
+                                                                         
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;                   
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;                   
+import com.qualcomm.robotcore.hardware.DcMotor;                          
+import com.qualcomm.robotcore.hardware.DcMotorSimple;                    
+                                                                         
+import java.util.Arrays;                                                 
+                                                                         
+                                                                         
+/**                                                                      
+ * Created by eharwood on 10/2/17.                                       
+ *                                                                       
  * This code was adopted by referencing code from:
  * https://github.com/ethan-schaffer/Sample-FTC-Code/blob/master/ftc_app-master/ftc_app-master/TeamCode/src/main/java/org/firstinspires/ftc/teamcode/MecanumSamples/MecanumTeleOp.java
  *
@@ -33,21 +33,21 @@ public class GhastineMecanumTeleOp extends OpMode {
     @Override
 
     public void init () {
-<<<<<<< Updated upstream
-        leftFront = hardwareMap.dcMotor.get(UniversalConstants.LEFT1NAME);
-        leftBack = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
-        rightFront = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
-        rightBack = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-=======
+// <<<<<<< Updated upstream
+//        leftFront = hardwareMap.dcMotor.get(UniversalConstants.LEFT1NAME);
+//        leftBack = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
+//        rightFront = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
+//        rightBack = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
+//        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+//        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+// =======
         leftFront = hardwareMap.dcMotor.get(UniversalConstants.LEFT1NAME);
         leftBack = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
         rightFront = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
         rightBack = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
->>>>>>> Stashed changes
+// >>>>>>> Stashed changes
         //double volts = hardwareMap.voltageSensor.get("MOtor Controller 1").getVoltage();
 
     }
