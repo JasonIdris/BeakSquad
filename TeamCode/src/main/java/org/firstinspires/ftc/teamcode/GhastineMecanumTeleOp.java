@@ -28,17 +28,26 @@ public class GhastineMecanumTeleOp extends OpMode {
     private static final double ACCEPTINPUTTHRESHOLD =  .15;
     private static final double SCALEDPOWER = 1;  // The emphasis is on the current controller reading (vs. current motor power) on the drive train
 
-    private static DcMotor leftFrontWheel, leftBackWheel, rightFrontWheel, rightBackWheel;
+    private static DcMotor leftFront, leftBack, rightFront, rightBack;
 
     @Override
 
     public void init () {
-        leftFrontWheel = hardwareMap.dcMotor.get(UniversalConstants.LEFT1NAME);
-        leftBackWheel = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
-        rightFrontWheel = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
-        rightBackWheel = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
-        leftFrontWheel.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFrontWheel.setDirection(DcMotorSimple.Direction.REVERSE);
+<<<<<<< Updated upstream
+        leftFront = hardwareMap.dcMotor.get(UniversalConstants.LEFT1NAME);
+        leftBack = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
+        rightFront = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
+        rightBack = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+=======
+        leftFront = hardwareMap.dcMotor.get(UniversalConstants.LEFT1NAME);
+        leftBack = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
+        rightFront = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
+        rightBack = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+>>>>>>> Stashed changes
         //double volts = hardwareMap.voltageSensor.get("MOtor Controller 1").getVoltage();
 
     }
@@ -49,7 +58,7 @@ public class GhastineMecanumTeleOp extends OpMode {
         double inputX = Math.abs(gamepad1.left_stick_x) > ACCEPTINPUTTHRESHOLD ? -gamepad1.left_stick_x : 0;
         double inputC = Math.abs(gamepad1.right_stick_x)> ACCEPTINPUTTHRESHOLD ? -gamepad1.right_stick_x: 0;
 
-        arcadeMecanum(inputY, inputX, inputC, leftFrontWheel, rightFrontWheel, leftBackWheel, rightBackWheel);
+        arcadeMecanum(inputY, inputX, inputC, leftFront, rightFront, leftBack, rightBack);
     }
 
     // y - forwards
