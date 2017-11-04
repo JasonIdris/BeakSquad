@@ -51,10 +51,10 @@ public class MecanumTeleOp extends LinearOpMode {
     }
 
     private void initMotors() {
-        leftFront = hardwareMap.dcMotor.get("lf");
-        leftBack = hardwareMap.dcMotor.get("lb");
-        rightFront = hardwareMap.dcMotor.get("rf");
-        rightBack = hardwareMap.dcMotor.get("rb");
+        leftFront = hardwareMap.dcMotor.get(UniversalConstants.LEFT1NAME);
+        leftBack = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
+        rightFront = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
+        rightBack = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
     }
 
     private void moveMecanum(float Ch1, float Ch3, float Ch4) {
