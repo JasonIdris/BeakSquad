@@ -29,6 +29,8 @@ public class LiftMechanism extends LinearOpMode {
 
         initMotors();
 
+        leftServo.setPosition(maxServoPos);
+
         waitForStart();
 
         while (opModeIsActive()) {
@@ -48,6 +50,20 @@ public class LiftMechanism extends LinearOpMode {
                     rightServo.setPosition(minServoPos);
                 } else {
                     rightServo.setPosition(maxServoPos);
+                }
+            }
+
+            if (gamepad2.a) {
+                if (rightServo.getPosition() == maxServoPos) {
+                    rightServo.setPosition(minServoPos);
+                } else {
+                    rightServo.setPosition(maxServoPos);
+                }
+
+                if (leftServo.getPosition() == minServoPos) {
+                    leftServo.setPosition(maxServoPos);
+                } else {
+                    leftServo.setPosition(minServoPos);
                 }
             }
 
