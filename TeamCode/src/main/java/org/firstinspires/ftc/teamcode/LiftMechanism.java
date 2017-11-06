@@ -29,7 +29,12 @@ public class LiftMechanism extends LinearOpMode {
 
         initMotors();
 
-        leftServo.setPosition(maxServoPos);
+        leftServo.setPosition(minServoPos);
+        rightServo.setPosition(maxServoPos);
+
+        liftMotor.setPower(-0.5);
+        wait(2000);
+        liftMotor.setPower(0);
 
         waitForStart();
 
