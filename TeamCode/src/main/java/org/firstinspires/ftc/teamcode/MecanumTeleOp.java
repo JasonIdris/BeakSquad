@@ -18,7 +18,7 @@ public class MecanumTeleOp extends LinearOpMode {
     private DcMotor rightFront;
     private DcMotor rightBack;
 
-    private int DEADZONE = 20;
+    private double DEADZONE = 0.1;
 
     @Override
     public void runOpMode() throws InterruptedException {
