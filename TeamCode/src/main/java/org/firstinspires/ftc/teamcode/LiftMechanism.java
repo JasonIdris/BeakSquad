@@ -40,41 +40,7 @@ public class LiftMechanism extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            liftMotor.setPower(gamepad2.right_trigger);
 
-            if (gamepad2.left_bumper) {
-                if (leftServo.getPosition() == minServoPos) {
-                    leftServo.setPosition(maxServoPos);
-                } else {
-                    leftServo.setPosition(minServoPos);
-                }
-            }
-
-            if (gamepad2.right_bumper) {
-                if (rightServo.getPosition() == maxServoPos) {
-                    rightServo.setPosition(minServoPos);
-                } else {
-                    rightServo.setPosition(maxServoPos);
-                }
-            }
-
-            if (gamepad2.a) {
-                if (rightServo.getPosition() == maxServoPos) {
-                    rightServo.setPosition(minServoPos);
-                } else {
-                    rightServo.setPosition(maxServoPos);
-                }
-
-                if (leftServo.getPosition() == minServoPos) {
-                    leftServo.setPosition(maxServoPos);
-                } else {
-                    leftServo.setPosition(minServoPos);
-                }
-            }
-
-
-            liftMotor.setPower(gamepad2.right_trigger);
-            liftMotor.setPower(-gamepad2.left_trigger);
 
 
             idle();
