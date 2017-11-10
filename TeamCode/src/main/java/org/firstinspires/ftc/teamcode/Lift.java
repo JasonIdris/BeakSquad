@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 /**
  * Created by albusdumbledore on 11/6/17.
  */
+//slashforceforlife
 
 public class Lift extends MasterTeleOp {
     private static Lift instance = new Lift();
