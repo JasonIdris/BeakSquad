@@ -29,7 +29,7 @@ public abstract class AutonBase {
 
     public void runAction(Action action) {
         action.start();
-        if (isActive() && !action.isFinished) {
+        if (isActive() && !action.isFinished()) {
             action.update();
         }
         action.done();
