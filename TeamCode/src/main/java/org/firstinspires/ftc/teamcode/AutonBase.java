@@ -26,7 +26,7 @@ public abstract class AutonBase {
     public boolean isActive() {
         return active;
     }
-
+    /*
     public void runAction(Action action) {
         action.start();
         if (isActive() && !action.isFinished()) {
@@ -34,4 +34,5 @@ public abstract class AutonBase {
         }
         action.done();
     }
+    */
 }
