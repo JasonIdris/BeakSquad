@@ -30,7 +30,7 @@ public class Lift extends MasterTeleOp {
     }
 
     public void controlLift(Gamepad gamepad) {
-        liftMotor.setPower(gamepad2.right_trigger);
+        //liftMotor.setPower(gamepad2.right_trigger);
 
         if (gamepad2.left_bumper) {
             if (leftServo.getPosition() == minServoPos) {
@@ -63,9 +63,9 @@ public class Lift extends MasterTeleOp {
         }
 
         if (gamepad2.right_trigger > 0.1) {
-            liftMotor.setPower(gamepad2.right_trigger);
+            liftMotor.setPower(gamepad2.right_trigger * .3);
         } else if (gamepad2.left_trigger > 0.1) {
-            liftMotor.setPower(-gamepad2.left_trigger);
+            liftMotor.setPower(-gamepad2.left_trigger * .3);
         } else {
             liftMotor.setPower(0);
         }
