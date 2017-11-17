@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -9,6 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  * Created by connorespenshade on 11/17/17.
  */
 
+@TeleOp(name = "Easy Mecanum")
 public class EasyJoysticks extends LinearOpMode {
 
     private DcMotor leftFront;
@@ -103,7 +105,7 @@ public class EasyJoysticks extends LinearOpMode {
             }
 
             leftServo.setPosition(gamepad2.left_stick_x * 0.3 + 0.5);
-            rightServo.setPosition(-(gamepad2.left_stick_x * 0.3 + 0.5));
+            rightServo.setPosition(-(gamepad2.left_stick_x * 0.3) + 0.5);
 
 
 
