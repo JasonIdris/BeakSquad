@@ -17,8 +17,8 @@ public class LiftMechanism extends LinearOpMode {
     //LIFT MOTOR (DC MOTOR)
     //GAMEPAD 2
 
-    private double minServoPos = 0.2;
-    private double maxServoPos = 0.8;
+    private double minServoPos = 0.5;
+    private double maxServoPos = -0.5;
 
     private Servo leftServo;
     private Servo rightServo;
@@ -29,18 +29,54 @@ public class LiftMechanism extends LinearOpMode {
 
         initMotors();
 
-        leftServo.setPosition(minServoPos);
-        rightServo.setPosition(maxServoPos);
-
+        //leftServo.setPosition(minServoPos);
+        //rightServo.setPosition(maxServoPos);
+/*
         liftMotor.setPower(-0.5);
         wait(2000);
         liftMotor.setPower(0);
-
+*/
         waitForStart();
 
         while (opModeIsActive()) {
 
+            if (gamepad2.left_bumper) {
+                if (leftServo.getPosition() == minServoPos) {
+                    leftServo.setPosition(maxServoPos);
+                } else {
+                    leftServo.setPosition(minServoPos);
+                }
+            }
 
+            if (gamepad2.right_bumper) {
+                if (rightServo.getPosition() == maxServoPos) {
+                    rightServo.setPosition(minServoPos);
+                } else {
+                    rightServo.setPosition(maxServoPos);
+                }
+            }
+
+            if (gamepad2.a) {
+                if (rightServo.getPosition() == maxServoPos) {
+                    rightServo.setPosition(minServoPos);
+                } else {
+                    rightServo.setPosition(maxServoPos);
+                }
+
+                if (leftServo.getPosition() == minServoPos) {
+                    leftServo.setPosition(maxServoPos);
+                } else {
+                    leftServo.setPosition(minServoPos);
+                }
+            }
+
+            if (gamepad2.right_trigger > 0.1) {
+                liftMotor.setPower(gamepad2.right_trigger * .3);
+            } else if (gamepad2.left_trigger > 0.1) {
+                liftMotor.setPower(-gamepad2.left_trigger * .3);
+            } else {
+                liftMotor.setPower(0);
+            }
 
 
             idle();
