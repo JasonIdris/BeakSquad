@@ -41,9 +41,6 @@ public class EasyJoysticks extends LinearOpMode {
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        double leftServoTargetPos = 0.1;
-        double rightServoTargetPos = 0.57;
-
         waitForStart();
 
         while (opModeIsActive()) {
@@ -86,16 +83,7 @@ public class EasyJoysticks extends LinearOpMode {
                 }
             }
 */
-            if (gamepad2.a) {
-                leftServoTargetPos = -0.5;
-                rightServoTargetPos = 0.57;
-            }
-
-            if (gamepad2.b) {
-                leftServoTargetPos = -0.4;
-                rightServoTargetPos = 0.7;
-            }
-
+/*
             if (gamepad2.left_trigger > 0.1) {
                 liftMotor.setPower(gamepad2.left_trigger * .3);
             } else if (gamepad2.right_trigger > 0.1) {
@@ -103,14 +91,12 @@ public class EasyJoysticks extends LinearOpMode {
             } else {
                 liftMotor.setPower(0);
             }
+    */
+            liftMotor.setPower(gamepad2.right_stick_y);
 
             leftServo.setPosition(gamepad2.left_stick_x * 0.3 + 0.5);
             rightServo.setPosition(-(gamepad2.left_stick_x * 0.3) + 0.5);
 
-
-
-            telemetry.addData("Left Servo Target Position", leftServoTargetPos);
-            telemetry.addData("Right Servo Target Position", rightServoTargetPos);
             telemetry.addData("Left Servo Actual Position", leftServo.getPosition());
 
             idle();
