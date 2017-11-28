@@ -66,7 +66,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
  */
 
 @Autonomous(name="Concept: VuMark Id", group ="Concept")
-@Disabled
+//@Disabled
 public class ConceptVuMarkIdentification extends LinearOpMode {
 
     public static final String TAG = "Vuforia VuMark Sample";
@@ -103,7 +103,7 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
          * Once you've obtained a license key, copy the string from the Vuforia web site
          * and paste it in to your code onthe next line, between the double quotes.
          */
-        parameters.vuforiaLicenseKey = "ATsODcD/////AAAAAVw2lR...d45oGpdljdOh5LuFB9nDNfckoxb8COxKSFX";
+        parameters.vuforiaLicenseKey = "AR3UNn//////AAAAGWw+kvrhWEQ/n8JGCEaAl3lHjtRjVuwoY6pyIsg6Fc1fYaZbyySiQYqRxF29tMJufsu1X91zq+pfrk7qUb49WyQcME7VPLelNQj4I/8QV4nYk/8MqwfVFKqidKnYX2XGxyeLnH2wbOK04Ot9lpDYhBgjs7crF8Lbw/LEv21h54owkSRCsT4SuH0EKIztAlQfhUkwEtZyJ7QGzwtBJ3du06z4MMZcjPX56vPHf6ov4q+4yz2Z3i9RtDGAmIKxl+b31KX50XsZphctCQs5ig16Ho3Anux7E4dQ3/cq2dYGTwzUUiVl4sduiDjrU7O7rlu46X/F4CaTn6Iw7/PKBRe+/jC5iXwcin4U8cDWWxcsVagJ";
 
         /*
          * We also indicate which camera on the RC that we wish to use.
@@ -157,15 +157,39 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
                     VectorF trans = pose.getTranslation();
                     Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
 
+                    telemetry.addData("VuMark ID", vuMark.name());
+
                     // Extract the X, Y, and Z components of the offset of the target relative to the robot
                     double tX = trans.get(0);
                     double tY = trans.get(1);
                     double tZ = trans.get(2);
 
+                    tX = Math.round(tX * 100);
+                    tX = tX/100;
+
+                    tY = Math.round(tY * 100);
+                    tY = tY/100;
+
+                    tZ = Math.round(tZ * 100);
+                    tZ = tZ/100;
+
+                    telemetry.addData("Translation", (Double.toString(tX)) + ", " + (Double.toString(tY)) + ", " + (Double.toString(tZ)));
+
                     // Extract the rotational components of the target relative to the robot
                     double rX = rot.firstAngle;
                     double rY = rot.secondAngle;
                     double rZ = rot.thirdAngle;
+
+                    rX = Math.round(rX * 100);
+                    rX = rX/100;
+
+                    rY = Math.round(rY * 100);
+                    rY = rY/100;
+
+                    rZ = Math.round(rZ * 100);
+                    rZ = rZ/100;
+
+                    telemetry.addData("Rotation", (Double.toString(rX)) + ", " + (Double.toString(rY)) + ", " + (Double.toString(rZ)));
                 }
             }
             else {
