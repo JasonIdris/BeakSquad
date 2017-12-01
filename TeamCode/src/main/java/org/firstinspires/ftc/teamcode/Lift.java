@@ -5,12 +5,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import junit.framework.Test;
+
 /**
  * Created by albusdumbledore on 11/6/17.
  */
-//slashforceforlifesszzzzza
 
-public class Lift extends MasterTeleOp {
+
+public class Lift extends TestAuton {
     private static Lift instance = new Lift();
 
     public static Lift getInstance() {

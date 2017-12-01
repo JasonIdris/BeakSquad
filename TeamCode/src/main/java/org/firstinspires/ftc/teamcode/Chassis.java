@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * Created by albusdumbledore on 11/6/17.
  */
 
-public class Chassis extends MasterTeleOp {
+public class Chassis extends TestAuton {
     private static Chassis instance = new Chassis();
 
     public static Chassis getInstance() {
@@ -27,10 +27,10 @@ public class Chassis extends MasterTeleOp {
     private double DEADZONE = 0.05;
 
     private Chassis() {
-        leftFront = hardwareMap.dcMotor.get(UniversalConstants.LEFT1NAME);
-        leftBack = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
-        rightFront = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
-        rightBack = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
+        leftFront = hardwareMap.dcMotor.get("lf");
+        leftBack = hardwareMap.dcMotor.get("lb");
+        rightFront = hardwareMap.dcMotor.get("rf");
+        rightBack = hardwareMap.dcMotor.get("rb");
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);

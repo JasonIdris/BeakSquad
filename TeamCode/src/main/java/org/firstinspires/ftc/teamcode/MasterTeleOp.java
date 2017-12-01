@@ -14,7 +14,7 @@ public class MasterTeleOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         //ENSURES ONLY ONE OBJECT
-        //Chassis chassis = Chassis.getInstance();
+        Chassis chassis = Chassis.getInstance();
         Lift lift = Lift.getInstance();
 
         waitForStart();
