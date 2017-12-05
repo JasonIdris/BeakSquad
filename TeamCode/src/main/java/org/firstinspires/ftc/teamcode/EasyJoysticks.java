@@ -43,7 +43,7 @@ public class EasyJoysticks extends LinearOpMode {
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        bottomButton = hardwareMap.get(DigitalChannel.class, "bottom");
+        bottomButton = hardwareMap.get(DigitalChannel.class, "sensor_digital");
         // set the digital channel to input.
         bottomButton.setMode(DigitalChannel.Mode.INPUT);
 
@@ -57,7 +57,6 @@ public class EasyJoysticks extends LinearOpMode {
                 liftMotor.setPower(0.1);
                 idle();
             }
-
             double Ch3 = gamepad1.right_stick_x;
             double Ch1 = -gamepad1.left_stick_y;
             double Ch4 = gamepad1.left_stick_x;
