@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
 
 /**
@@ -24,6 +25,9 @@ public class EasyJoysticks extends LinearOpMode {
 
     private double DEADZONE = 0.1;
 
+    DigitalChannel bottomButton;  // Hardware Device Object
+    DigitalChannel topButton;
+
     @Override
     public void runOpMode() throws InterruptedException {
 //thhing
@@ -41,11 +45,23 @@ public class EasyJoysticks extends LinearOpMode {
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        bottomButton = hardwareMap.get(DigitalChannel.class, "bottom");
+        topButton = hardwareMap.get(DigitalChannel.class, "top");
+
+        // set the digital channel to input.
+        bottomButton.setMode(DigitalChannel.Mode.INPUT);
+        topButton.setMode(DigitalChannel.Mode.INPUT);
+
         waitForStart();
 
         while (opModeIsActive()) {
 
             //moveMecanum(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
+
+            while (topButton.getState()) {
+                liftMotor.setPower(0.1);
+                idle();
+            }
 
             double Ch3 = gamepad1.right_stick_x;
             double Ch1 = -gamepad1.left_stick_y;
@@ -66,38 +82,27 @@ public class EasyJoysticks extends LinearOpMode {
             telemetry.addData("LB Power", leftBack.getPower());
             telemetry.addData("RF Power", rightFront.getPower());
             telemetry.addData("RB Power", rightBack.getPower());
-/*
-            if (gamepad2.left_bumper) {
-                if (leftServo.getPosition() == minServoPos) {
-                    leftServo.setPosition(maxServoPos);
-                } else {
-                    leftServo.setPosition(minServoPos);
-                }
-            }
 
-            if (gamepad2.right_bumper) {
-                if (rightServo.getPosition() == maxServoPos) {
-                    rightServo.setPosition(minServoPos);
-                } else {
-                    rightServo.setPosition(maxServoPos);
-                }
-            }
-*/
-/*
-            if (gamepad2.left_trigger > 0.1) {
-                liftMotor.setPower(gamepad2.left_trigger * .3);
-            } else if (gamepad2.right_trigger > 0.1) {
-                liftMotor.setPower(-gamepad2.right_trigger * .3);
-            } else {
-                liftMotor.setPower(0);
-            }
-    */
             liftMotor.setPower(gamepad2.right_stick_y);
 
             leftServo.setPosition(gamepad2.left_stick_x * 0.3 + 0.5);
             rightServo.setPosition(-(gamepad2.left_stick_x * 0.3) + 0.5);
 
             telemetry.addData("Left Servo Actual Position", leftServo.getPosition());
+
+            if (bottomButton.getState() == true) {
+                telemetry.addData("Back Touch", "Is Not Pressed");
+            } else {
+                telemetry.addData("Back Touch", "Is Pressed");
+                liftMotor.setPower(0);
+            }
+
+            if (topButton.getState() == true) {
+                telemetry.addData("Front Touch", "Is Not Pressed");
+            } else {
+                telemetry.addData("Front Touch", "Is Pressed");
+                liftMotor.setPower(0);
+            }
 
             idle();
         }
