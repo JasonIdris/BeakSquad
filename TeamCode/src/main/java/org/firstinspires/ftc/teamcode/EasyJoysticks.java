@@ -26,8 +26,6 @@ public class EasyJoysticks extends LinearOpMode {
     private double DEADZONE = 0.1;
 
     DigitalChannel bottomButton;  // Hardware Device Object
-    DigitalChannel topButton;
-
     @Override
     public void runOpMode() throws InterruptedException {
 //thhing
@@ -46,11 +44,8 @@ public class EasyJoysticks extends LinearOpMode {
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         bottomButton = hardwareMap.get(DigitalChannel.class, "bottom");
-        topButton = hardwareMap.get(DigitalChannel.class, "top");
-
         // set the digital channel to input.
         bottomButton.setMode(DigitalChannel.Mode.INPUT);
-        topButton.setMode(DigitalChannel.Mode.INPUT);
 
         waitForStart();
 
@@ -58,7 +53,7 @@ public class EasyJoysticks extends LinearOpMode {
 
             //moveMecanum(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
 
-            while (topButton.getState()) {
+            while (bottomButton.getState()) {
                 liftMotor.setPower(0.1);
                 idle();
             }
@@ -94,13 +89,6 @@ public class EasyJoysticks extends LinearOpMode {
                 telemetry.addData("Back Touch", "Is Not Pressed");
             } else {
                 telemetry.addData("Back Touch", "Is Pressed");
-                liftMotor.setPower(0);
-            }
-
-            if (topButton.getState() == true) {
-                telemetry.addData("Front Touch", "Is Not Pressed");
-            } else {
-                telemetry.addData("Front Touch", "Is Pressed");
                 liftMotor.setPower(0);
             }
 

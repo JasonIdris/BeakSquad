@@ -25,11 +25,7 @@ public class LiftMechanism extends LinearOpMode {
     private Servo rightServo;
     private DcMotor liftMotor;
 
-    private Boolean top = false;
-    private Boolean bottom = false;
-
-    DigitalChannel bottomButton;  // Hardware Device Object
-    DigitalChannel topButton; //Hardware Device Object
+    DigitalChannel digitalTouch;  // Hardware Device Object
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -86,12 +82,10 @@ public class LiftMechanism extends LinearOpMode {
             }
 
             // get a reference to our digitalTouch object.
-            bottomButton = hardwareMap.get(DigitalChannel.class, "bottom");
-            topButton = hardwareMap.get(DigitalChannel.class, "top");
+            digitalTouch = hardwareMap.get(DigitalChannel.class, "sensor_digital");
 
             // set the digital channel to input.
-            bottomButton.setMode(DigitalChannel.Mode.INPUT);
-            topButton.setMode(DigitalChannel.Mode.INPUT);
+            digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
             // wait for the start button to be pressed.
             waitForStart();
@@ -102,27 +96,14 @@ public class LiftMechanism extends LinearOpMode {
 
                 // send the info back to driver station using telemetry function.
                 // if the digital channel returns true it's HIGH and the button is unpressed.
-
-                while (topButton.getState()) {
-                    liftMotor.setPower(0.1);
-                    idle();
-                }
-
-                if (bottomButton.getState() == true) {
-                    telemetry.addData("Back Touch", "Is Not Pressed");
+                if (digitalTouch.getState() == true) {
+                    telemetry.addData("Digital Touch", "Is Not Pressed");
                 } else {
-                    telemetry.addData("Back Touch", "Is Pressed");
-                    liftMotor.setPower(0);
-                }
-
-                if (topButton.getState() == true) {
-                    telemetry.addData("Front Touch", "Is Not Pressed");
-                } else {
-                    telemetry.addData("Front Touch", "Is Pressed");
-                    liftMotor.setPower(0);
+                    telemetry.addData("Digital Touch", "Is Pressed");
                 }
 
                 telemetry.update();
+
 
                 idle();
             }
