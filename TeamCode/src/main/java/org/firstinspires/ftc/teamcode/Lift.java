@@ -1,9 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import junit.framework.Test;
 
@@ -12,64 +15,39 @@ import junit.framework.Test;
  */
 
 
-public class Lift extends TestAuton {
-    private static Lift instance = new Lift();
+public class Lift {
+    private DcMotor liftMotor;
+    private Servo leftArm;
+    private Servo rightArm;
 
-    public static Lift getInstance() {
-        return instance;
-    }
     private double minServoPos = 0.2;
     private double maxServoPos = 0.8;
 
-    private Servo leftServo;
-    private Servo rightServo;
-    private DcMotor liftMotor;
+    private DigitalChannel sensor;
 
-    private Lift() {
-        leftServo = hardwareMap.servo.get("ls");
-        rightServo = hardwareMap.servo.get("rs");
+    public Lift(HardwareMap hardwareMap) {
+        leftArm = hardwareMap.servo.get("ls");
+        rightArm = hardwareMap.servo.get("rs");
         liftMotor = hardwareMap.dcMotor.get("lift");
+        sensor = hardwareMap.digitalChannel.get("sensor");
     }
 
-    public void controlLift(Gamepad gamepad) {
+    public void controlLift(Gamepad gamepad2) {
         //liftMotor.setPower(gamepad2.right_trigger);
 
-        if (gamepad2.left_bumper) {
-            if (leftServo.getPosition() == minServoPos) {
-                leftServo.setPosition(maxServoPos);
-            } else {
-                leftServo.setPosition(minServoPos);
-            }
+        liftMotor.setPower(gamepad2.right_stick_y);
+
+        leftArm.setPosition(gamepad2.left_stick_x * 0.3 + 0.5);
+        rightArm.setPosition(-(gamepad2.left_stick_x * 0.3) + 0.5);
+    }
+
+    public void initLift() {
+
+        while (sensor.getState()) {
+            liftMotor.setPower(-0.5);
         }
 
-        if (gamepad2.right_bumper) {
-            if (rightServo.getPosition() == maxServoPos) {
-                rightServo.setPosition(minServoPos);
-            } else {
-                rightServo.setPosition(maxServoPos);
-            }
-        }
-
-        if (gamepad2.a) {
-            if (rightServo.getPosition() == maxServoPos) {
-                rightServo.setPosition(minServoPos);
-            } else {
-                rightServo.setPosition(maxServoPos);
-            }
-
-            if (leftServo.getPosition() == minServoPos) {
-                leftServo.setPosition(maxServoPos);
-            } else {
-                leftServo.setPosition(minServoPos);
-            }
-        }
-
-        if (gamepad2.right_trigger > 0.1) {
-            liftMotor.setPower(gamepad2.right_trigger * .3);
-        } else if (gamepad2.left_trigger > 0.1) {
-            liftMotor.setPower(-gamepad2.left_trigger * .3);
-        } else {
-            liftMotor.setPower(0);
-        }
+        //liftMotor.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }

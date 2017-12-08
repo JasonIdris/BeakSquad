@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.hardware.logitech.LogitechGamepadF310;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
@@ -12,12 +14,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * Created by albusdumbledore on 11/6/17.
  */
 
-public class Chassis extends TestAuton {
-    private static Chassis instance = new Chassis();
-
-    public static Chassis getInstance() {
-        return instance;
-    }
+public class Chassis {
 
     private DcMotor leftFront;
     private DcMotor leftBack;
@@ -26,7 +23,7 @@ public class Chassis extends TestAuton {
 
     private double DEADZONE = 0.05;
 
-    private Chassis() {
+    public Chassis(HardwareMap hardwareMap) {
         leftFront = hardwareMap.dcMotor.get("lf");
         leftBack = hardwareMap.dcMotor.get("lb");
         rightFront = hardwareMap.dcMotor.get("rf");
@@ -41,21 +38,22 @@ public class Chassis extends TestAuton {
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
-    public void drive(float Ch1, float Ch3, float Ch4) {
-        double frontLeft = Ch3 + Ch1 + Ch4;
-        double rearLeft = Ch3 + Ch1 - Ch4;
-        double frontRight = Ch3 - Ch1 - Ch4;
-        double rearRight = Ch3 - Ch1 + Ch4;
+    public void drive(double throttle, double turn, double strafe) {
+        double frontLeft = turn + throttle + strafe;
+        double rearLeft = turn + throttle - strafe;
+        double frontRight = turn - throttle - strafe;
+        double rearRight = turn - throttle + strafe;
 
         //ADD DEADZONE
         leftFront.setPower(java.lang.Math.abs(frontLeft) > DEADZONE ? frontLeft : 0);
         leftBack.setPower(java.lang.Math.abs(rearLeft) > DEADZONE ? rearLeft : 0);
         rightFront.setPower(java.lang.Math.abs(frontRight) > DEADZONE ? frontRight : 0);
         rightBack.setPower(java.lang.Math.abs(rearRight) > DEADZONE ? rearRight : 0);
-
+/*
         telemetry.addData("LF Power", leftFront.getPower());
         telemetry.addData("LB Power", leftBack.getPower());
         telemetry.addData("RF Power", rightFront.getPower());
         telemetry.addData("RB Power", rightBack.getPower());
+        */
     }
 }
