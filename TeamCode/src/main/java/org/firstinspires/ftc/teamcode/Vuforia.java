@@ -26,6 +26,8 @@ public class Vuforia {
     private OpenGLMatrix lastLocation = null;
     private VuforiaLocalizer vuforia;
     private RelicRecoveryVuMark relicTemplate;
+    private VuforiaTrackables relicTrackablesMaster;
+    private VuforiaTrackable template;
 
     public Vuforia(HardwareMap hardwareMap) {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -39,33 +41,32 @@ public class Vuforia {
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
+        relicTrackablesMaster = relicTrackables;
+        template = relicTemplate;
+
         relicTrackables.activate();
     }
 
     private void track() {
         //RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-        RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+        relicTrackablesMaster.activate();
+        RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(template);
         if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
                 /* Found an instance of the template. In the actual game, you will probably
                  * loop until this condition occurs, then move on to act accordingly depending
                  * on which VuMark was visible. */
-            //telemetry.addData("VuMark", "%s visible", vuMark);
 
                 /* For fun, we also exhibit the navigational pose. In the Relic Recovery game,
                  * it is perhaps unlikely that you will actually need to act on this pose information, but
                  * we illustrate it nevertheless, for completeness. */
-            //OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getPose();
-            OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate).getPose();
-            //telemetry.addData("Pose", pose);
+            OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)template.getListener()).getPose();
 
                 /* We further illustrate how to decompose the pose into useful rotational and
                  * translational components */
             if (pose != null) {
                 VectorF trans = pose.getTranslation();
                 Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
-
-                //telemetry.addData("VuMark ID", vuMark.name());
 
                 // Extract the X, Y, and Z components of the offset of the target relative to the robot
                 double tX = trans.get(0);
@@ -80,8 +81,6 @@ public class Vuforia {
 
                 tZ = Math.round(tZ * 100);
                 tZ = tZ/100;
-
-                //telemetry.addData("Translation", (Double.toString(tX)) + ", " + (Double.toString(tY)) + ", " + (Double.toString(tZ)));
 
                 // Extract the rotational components of the target relative to the robot
                 double rX = rot.firstAngle;
