@@ -23,7 +23,20 @@ public class Chassis {
 
     private double DEADZONE = 0.05;
 
+    private static Chassis instance = null;
+    protected Chassis() {
+        // Exists only to defeat instantiation.
+    }
+
+    public static Chassis getInstance(HardwareMap hardware) {
+        if(instance == null) {
+            instance = new Chassis(hardware);
+        }
+        return instance;
+    }
+
     public Chassis(HardwareMap hardwareMap) {
+
         leftFront = hardwareMap.dcMotor.get("lf");
         leftBack = hardwareMap.dcMotor.get("lb");
         rightFront = hardwareMap.dcMotor.get("rf");

@@ -25,6 +25,18 @@ public class Lift {
 
     private DigitalChannel sensor;
 
+    private static Lift instance = null;
+    protected Lift() {
+        // Exists only to defeat instantiation.
+    }
+
+    public static Lift getInstance(HardwareMap hardware) {
+        if(instance == null) {
+            instance = new Lift(hardware);
+        }
+        return instance;
+    }
+
     public Lift(HardwareMap hardwareMap) {
         leftArm = hardwareMap.servo.get("ls");
         rightArm = hardwareMap.servo.get("rs");
