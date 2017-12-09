@@ -16,12 +16,13 @@ public class MasterTeleOp extends LinearOpMode {
         //ENSURES ONLY ONE OBJECT
         Chassis chassis = Chassis.getInstance(hardwareMap);
         Lift lift = Lift.getInstance(hardwareMap);
+        Vuforia vuforia = Vuforia.getInstance(hardwareMap);
 
         waitForStart();
 
         while (opModeIsActive()) {
 
-            //chassis.drive(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
+            chassis.drive(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
             lift.controlLift(gamepad2);
 
             idle();

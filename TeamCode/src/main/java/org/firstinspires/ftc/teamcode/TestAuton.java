@@ -11,9 +11,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name = "Test Autonomous")
 public class TestAuton extends LinearOpMode{
-    Chassis chassis = new Chassis(hardwareMap);
-    Lift lift = new Lift(hardwareMap);
-    Vuforia vuforia = new Vuforia(hardwareMap);
+    Chassis chassis = Chassis.getInstance(hardwareMap);
+    Lift lift = Lift.getInstance(hardwareMap);
+    Vuforia vuforia = Vuforia.getInstance(hardwareMap);
 
     @Override
     public void runOpMode() throws InterruptedException {

@@ -29,6 +29,18 @@ public class Vuforia {
     private VuforiaTrackables relicTrackablesMaster;
     private VuforiaTrackable template;
 
+    private static Vuforia instance = null;
+    protected Vuforia() {
+        // Exists only to defeat instantiation.
+    }
+
+    public static Vuforia getInstance(HardwareMap hardware) {
+        if(instance == null) {
+            instance = new Vuforia(hardware);
+        }
+        return instance;
+    }
+
     public Vuforia(HardwareMap hardwareMap) {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
