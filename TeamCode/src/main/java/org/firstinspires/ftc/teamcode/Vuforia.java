@@ -38,9 +38,12 @@ public class Vuforia {
         VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
+
+        relicTrackables.activate();
     }
 
     private void track() {
+        //RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
         RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
         if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
