@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  */
 
 @TeleOp(name = "Master")
-public class MasterTeleOp extends LinearOpMode {
+public class  MasterTeleOp extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
