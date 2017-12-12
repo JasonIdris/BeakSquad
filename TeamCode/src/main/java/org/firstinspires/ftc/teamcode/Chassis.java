@@ -62,11 +62,6 @@ public class Chassis {
         leftBack.setPower(java.lang.Math.abs(rearLeft) > DEADZONE ? rearLeft : 0);
         rightFront.setPower(java.lang.Math.abs(frontRight) > DEADZONE ? frontRight : 0);
         rightBack.setPower(java.lang.Math.abs(rearRight) > DEADZONE ? rearRight : 0);
-/*
-        telemetry.addData("LF Power", leftFront.getPower());
-        telemetry.addData("LB Power", leftBack.getPower());
-        telemetry.addData("RF Power", rightFront.getPower());
-        telemetry.addData("RB Power", rightBack.getPower());
-        */
+
     }
 }
