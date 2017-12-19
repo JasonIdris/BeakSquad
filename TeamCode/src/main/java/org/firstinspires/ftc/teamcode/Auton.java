@@ -24,30 +24,23 @@ public class Auton extends LinearOpMode {
         leftBack = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
         rightFront = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
         rightBack = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        //leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        //rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
+        //code to run while waiting
+
+        leftFront.setPower(0.5);
+        leftBack.setPower(0.5);
+        rightFront.setPower(0.5);
+        rightBack.setPower(0.5);
 
 
-        this.resetStartTime();
-
-        if (this.getRuntime() > 2.0) { //this will wait 1 second; change the value to wait a different amount of tim
-            //code to run once wait is complete
-
-            leftFront.setPower(0);
-            leftBack.setPower(0);
-            rightFront.setPower(0);
-            rightBack.setPower(0);
-        }
-        else {
-            //code to run while waiting
-
-            leftFront.setPower(0.5);
-            leftBack.setPower(0.5);
-            rightFront.setPower(0.5);
-            rightBack.setPower(0.5);
+        try {
+            Thread.sleep(2000);
+        }catch(InterruptedException e){
+            System.out.println("got interrupted!");
         }
 
     }
