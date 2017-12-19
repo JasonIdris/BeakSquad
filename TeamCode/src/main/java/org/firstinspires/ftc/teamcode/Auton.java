@@ -24,17 +24,25 @@ public class Auton extends LinearOpMode {
         leftBack = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
         rightFront = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
         rightBack = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
+
+        //SPIN
+
         //leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         //rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+        //FOWARD
+        //leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        //rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
         //code to run while waiting
 
         leftFront.setPower(0.5);
-        leftBack.setPower(0.5);
+        leftBack.setPower(0.6;
         rightFront.setPower(0.5);
-        rightBack.setPower(0.5);
+        rightBack.setPower(0.6);
 
 
         try {
