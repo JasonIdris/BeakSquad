@@ -32,21 +32,44 @@ public class Auton extends LinearOpMode {
 
 
         //FOWARD
-        //leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        //rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         waitForStart();
 
+
         //code to run while waiting
 
-        leftFront.setPower(0.5);
-        leftBack.setPower(0.6;
-        rightFront.setPower(0.5);
-        rightBack.setPower(0.6);
+        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        leftFront.setPower(1);
+        leftBack.setPower(1);
+        rightFront.setPower(1);
+        rightBack.setPower(1);
+
+        telemetry.addData("LF", leftFront.getCurrentPosition());
+        telemetry.addData("LB", leftBack.getCurrentPosition());
+        telemetry.addData("RF", rightFront.getCurrentPosition());
+        telemetry.addData("RB", rightBack.getCurrentPosition());
 
 
         try {
             Thread.sleep(2000);
+
+            leftFront.setPower(0);
+            leftBack.setPower(0);
+            rightFront.setPower(0);
+            rightBack.setPower(0);
+
+            Thread.sleep(10000);
         }catch(InterruptedException e){
             System.out.println("got interrupted!");
         }
