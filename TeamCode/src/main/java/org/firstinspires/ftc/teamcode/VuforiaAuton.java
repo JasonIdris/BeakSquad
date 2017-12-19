@@ -88,21 +88,21 @@ public class VuforiaAuton extends LinearOpMode {
                     tY = tY/100;
 
                     if (vuMark.name() == "Left") {
-                        if (tY < 1) {
+                        if (tY > 1) {
                             leftFront.setPower(0.5);
                             leftBack.setPower(0.5);
                             rightFront.setPower(0.5);
                             rightBack.setPower(0.5);
                         }
                     } else if (vuMark.name() == "Center") {
-                        if (tY < 2) {
+                        if (tY > 2) {
                             leftFront.setPower(0.5);
                             leftBack.setPower(0.5);
                             rightFront.setPower(0.5);
                             rightBack.setPower(0.5);
                         }
                     } else /*RIGHT*/{
-                        if (tY < 3) {
+                        if (tY > 3) {
                             leftFront.setPower(0.5);
                             leftBack.setPower(0.5);
                             rightFront.setPower(0.5);
