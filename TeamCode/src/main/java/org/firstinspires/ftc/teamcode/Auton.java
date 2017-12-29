@@ -42,6 +42,7 @@ public class Auton extends LinearOpMode {
 
         waitForStart();
 
+        //HELLO
 
         //code to run while waiting
 
