@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  * Created by connorespenshade on 12/19/17.
  */
 
-@Autonomous(name = "TestAutonConnor")
-public class Auton extends LinearOpMode {
+@Autonomous(name = "TenSecondAuton")
+public class TenSecondAuton extends LinearOpMode {
 
     DcMotor leftFront;
     DcMotor leftBack;
@@ -63,7 +63,7 @@ public class Auton extends LinearOpMode {
 
         telemetry.update();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(10000);
 
             leftFront.setPower(0);
             leftBack.setPower(0);

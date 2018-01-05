@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  * Created by connorespenshade on 12/19/17.
  */
 
-@Autonomous(name = "TestAutonConnor")
-public class Auton extends LinearOpMode {
+@Autonomous(name = "LeftBackAuton")
+public class LeftBackAuton extends LinearOpMode {
 
     DcMotor leftFront;
     DcMotor leftBack;
@@ -51,10 +51,10 @@ public class Auton extends LinearOpMode {
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        leftFront.setPower(1);
+        //leftFront.setPower(1);
         leftBack.setPower(1);
-        rightFront.setPower(1);
-        rightBack.setPower(1);
+        //rightFront.setPower(1);
+        //rightBack.setPower(1);
 
         telemetry.addData("LF", leftFront.getCurrentPosition());
         telemetry.addData("LB", leftBack.getCurrentPosition());
