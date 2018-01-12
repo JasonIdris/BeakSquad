@@ -34,7 +34,7 @@ public class Lift {
     }
 
     public static Lift getInstance(HardwareMap hardware) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Lift(hardware);
         }
         return instance;
@@ -43,9 +43,9 @@ public class Lift {
     public Lift(HardwareMap hardwareMap) {
         leftArm = hardwareMap.servo.get("ls");
         rightArm = hardwareMap.servo.get("rs");
-        liftMotor = hardwareMap.dcMotor.get("lift");
+        liftMotor = hardwareMap.dcMotor.get("lf2");
         sensor = hardwareMap.digitalChannel.get("sensor");
-        touchSensor = hardwareMap.touchSensor.get("sensor");
+        touchSensor = hardwareMap.touchSensor.get("spagget");
     }
 
     public void controlLift(Gamepad gamepad2) {
