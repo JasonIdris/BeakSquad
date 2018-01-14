@@ -33,6 +33,8 @@ public class VuforiaAuton extends LinearOpMode {
     private DcMotor rightFront;
     private DcMotor rightBack;
 
+    private String crytoKey;
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -65,8 +67,22 @@ public class VuforiaAuton extends LinearOpMode {
 
             }
 
+            crytoKey = vuMark.name();
+
             gamepadDrive(1, 0,0);
             sleep(1000);
+            gamepadDrive(0,0,0);
+
+            while (vuMark != RelicRecoveryVuMark.UNKNOWN) {
+                drive(1,1,1,1);
+
+            }
+
+            gamepadDrive(0,0,1);
+            sleep(1000);
+            gamepadDrive(0,0,0);
+
+            //Vumark is now out of sight because of proximity to red thing.
 
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
