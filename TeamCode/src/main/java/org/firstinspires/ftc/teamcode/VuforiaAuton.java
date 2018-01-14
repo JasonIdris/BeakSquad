@@ -59,6 +59,15 @@ public class VuforiaAuton extends LinearOpMode {
         while (opModeIsActive()) {
 
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+            while (vuMark == RelicRecoveryVuMark.UNKNOWN) {
+                //Drive off platform
+                drive(-1, -1, -1, -1);
+
+            }
+
+            gamepadDrive(1, 0,0);
+            sleep(1000);
+
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
                 /* Found an instance of the template. In the actual game, you will probably
@@ -88,26 +97,11 @@ public class VuforiaAuton extends LinearOpMode {
                     tY = tY/100;
 
                     if (vuMark.name() == "Left") {
-                        if (tY > 1) {
-                            leftFront.setPower(0.5);
-                            leftBack.setPower(0.5);
-                            rightFront.setPower(0.5);
-                            rightBack.setPower(0.5);
-                        }
+
                     } else if (vuMark.name() == "Center") {
-                        if (tY > 2) {
-                            leftFront.setPower(0.5);
-                            leftBack.setPower(0.5);
-                            rightFront.setPower(0.5);
-                            rightBack.setPower(0.5);
-                        }
-                    } else /*RIGHT*/{
-                        if (tY > 3) {
-                            leftFront.setPower(0.5);
-                            leftBack.setPower(0.5);
-                            rightFront.setPower(0.5);
-                            rightBack.setPower(0.5);
-                        }
+
+                    } else if (vuMark.name() == "Right"){
+
                     }
 
                 }
@@ -129,5 +123,34 @@ public class VuforiaAuton extends LinearOpMode {
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+    }
+
+    private void drive(double leftFrontPower, double leftBackPower, double rightFrontPower, double rightBackPower) {
+        leftFront.setPower(leftFrontPower);
+        leftBack.setPower(leftBackPower);
+        rightFront.setPower(rightFrontPower);
+        rightBack.setPower(rightBackPower);
+
+    }
+
+    private void gamepadDrive(double leftX, double leftY, double rightX) {
+
+        double DEADZONE = 0.05;
+
+        double Ch3 = rightX;
+        double Ch1 = -leftY;
+        double Ch4 = leftX;
+
+        double FrontLeft = Ch3 + Ch1 + Ch4;
+        double RearLeft = Ch3 + Ch1 - Ch4;
+        double RearRight = Ch3 - Ch1 - Ch4;
+        double FrontRight = Ch3 - Ch1 + Ch4;
+
+
+        //ADD DEADZONE
+        leftFront.setPower(java.lang.Math.abs(FrontLeft) > DEADZONE ? FrontLeft : 0);
+        leftBack.setPower(java.lang.Math.abs(RearLeft) > DEADZONE ? RearLeft : 0);
+        rightFront.setPower(java.lang.Math.abs(FrontRight) > DEADZONE ? FrontRight : 0);
+        rightBack.setPower(java.lang.Math.abs(RearRight) > DEADZONE ? RearRight : 0);
     }
 }

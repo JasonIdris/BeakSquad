@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
 /**
@@ -22,11 +23,13 @@ public class EasyJoysticks extends LinearOpMode {
     private Servo leftServo;
     private Servo rightServo;
     private DcMotor liftMotor;
-    //private Servo jewelMotor;
+
+    private Boolean zeroed = false;
+    private DigitalChannel sensor;
 
     private double DEADZONE = 0.1;
 
-    DigitalChannel bottomButton;  // Hardware Device Object
+    // Hardware Device Object
     @Override
     public void runOpMode() throws InterruptedException {
 //thhing
@@ -38,27 +41,29 @@ public class EasyJoysticks extends LinearOpMode {
         leftServo = hardwareMap.servo.get("ls");
         rightServo = hardwareMap.servo.get("rs");
         liftMotor = hardwareMap.dcMotor.get("lift");
-        //jewelMotor = hardwareMap.servo.get("jewel_arm");
+
+        sensor = hardwareMap.digitalChannel.get("liftSensor");
 
         leftServo.setDirection(Servo.Direction.FORWARD);
 
         leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        bottomButton = hardwareMap.get(DigitalChannel.class, "sensor_digital");
+        //bottomButton = hardwareMap.get(DigitalChannel.class, "sensor_digital");
         // set the digital channel to input.
-        bottomButton.setMode(DigitalChannel.Mode.INPUT);
+        sensor.setMode(DigitalChannel.Mode.INPUT);
 
         waitForStart();
 
         while (opModeIsActive()) {
 
             //moveMecanum(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
-
-            while (bottomButton.getState()) {
+/*
+            while (sensor.getState()) {
                 liftMotor.setPower(0.1);
                 idle();
             }
+            */
             double Ch3 = gamepad1.right_stick_x;
             double Ch1 = -gamepad1.left_stick_y;
             double Ch4 = gamepad1.left_stick_x;
@@ -67,6 +72,7 @@ public class EasyJoysticks extends LinearOpMode {
             double RearLeft = Ch3 + Ch1 - Ch4;
             double RearRight = Ch3 - Ch1 - Ch4;
             double FrontRight = Ch3 - Ch1 + Ch4;
+
 
             //ADD DEADZONE
             leftFront.setPower(java.lang.Math.abs(FrontLeft) > DEADZONE ? FrontLeft : 0);
@@ -81,39 +87,67 @@ public class EasyJoysticks extends LinearOpMode {
 
             liftMotor.setPower(gamepad2.right_stick_y);
 
-            leftServo.setPosition(gamepad2.left_stick_x * 0.3 + 0.5);
-            rightServo.setPosition(-(gamepad2.left_stick_x * 0.3) + 0.5);
+
+            if (Math.abs(gamepad2.left_stick_x) > 0.1) {
+                leftServo.setPosition(gamepad2.left_stick_x * 0.3 + 0.5);
+
+                rightServo.setPosition(-(gamepad2.left_stick_x * 0.3) + 0.5);
+            } else {
+                leftServo.setPosition(0.5);
+                rightServo.setPosition(0.5);
+            }
+
+
+
+
 
             telemetry.addData("Left Servo Actual Position", leftServo.getPosition());
-
+/*
             if (bottomButton.getState() == true) {
                 telemetry.addData("Back Touch", "Is Not Pressed");
             } else {
                 telemetry.addData("Back Touch", "Is Pressed");
                 liftMotor.setPower(0);
             }
-/*
-            tgtPower = gamepad1.left_trigger;
-            liftMotor.setPower(tgtPower);
-            jewelMotor.
-            // check to see if we need to move the servo.
-
-            telemetry.addData("Servo Position", servoTest.getPosition());
-            telemetry.addData("Target Power", tgtPower);
-            telemetry.addData("Motor Power", motorTest.getPower());
-            telemetry.addData("Status", "Running");
-            telemetry.update();
 */
+            controlLift(gamepad2);
+
             idle();
         }
     }
 
-    double tgtPower = 0;
+    private void controlLift(Gamepad gamepad) {
+/*
+        if (!zeroed) {
+            if (!sensor.getState()) {
+                liftMotor.setPower(-0.5);
+            } else {
+                liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                zeroed = true;
+                liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            }
+
+        } else {
+*/
+            double liftSpeed = gamepad.right_stick_y;
+
+            if (sensor.getState() && (liftMotor.getCurrentPosition() > 0.1)) {
+                liftSpeed = (liftSpeed > 0) ? 0.0 : liftSpeed;
+            } else if (sensor.getState() && (liftMotor.getCurrentPosition() < 0.1)) {
+                liftSpeed = (liftSpeed < 0) ? 0.0 : liftSpeed;
+            } else {
+                liftSpeed = 0;
+            }
+
+            liftMotor.setPower(liftSpeed);
+        //}
+
+    }
 
     /*
     private void moveMecanum(float Ch1, float Ch3, float Ch4) {
         double FrontLeft = Ch3 + Ch1 + Ch4;
-        double RearLeft = Ch3 + Ch1 - Ch4;
+        double RearLeft = Ch3 + Ch1 - Ch4;jizq
         double FrontRight = Ch3 - Ch1 - Ch4;
         double RearRight = Ch3 - Ch1 + Ch4;
 
@@ -125,6 +159,7 @@ public class EasyJoysticks extends LinearOpMode {
 
         telemetry.addData("LF Power", leftFront.getPower());
 
+        // moar commit
     }
 */
 
