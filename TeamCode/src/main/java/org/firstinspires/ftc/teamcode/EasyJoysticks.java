@@ -22,6 +22,7 @@ public class EasyJoysticks extends LinearOpMode {
     private Servo leftServo;
     private Servo rightServo;
     private DcMotor liftMotor;
+    //private Servo jewelMotor;
 
     private double DEADZONE = 0.1;
 
@@ -37,6 +38,7 @@ public class EasyJoysticks extends LinearOpMode {
         leftServo = hardwareMap.servo.get("ls");
         rightServo = hardwareMap.servo.get("rs");
         liftMotor = hardwareMap.dcMotor.get("lift");
+        //jewelMotor = hardwareMap.servo.get("jewel_arm");
 
         leftServo.setDirection(Servo.Direction.FORWARD);
 
@@ -90,10 +92,23 @@ public class EasyJoysticks extends LinearOpMode {
                 telemetry.addData("Back Touch", "Is Pressed");
                 liftMotor.setPower(0);
             }
+/*
+            tgtPower = gamepad1.left_trigger;
+            liftMotor.setPower(tgtPower);
+            jewelMotor.
+            // check to see if we need to move the servo.
 
+            telemetry.addData("Servo Position", servoTest.getPosition());
+            telemetry.addData("Target Power", tgtPower);
+            telemetry.addData("Motor Power", motorTest.getPower());
+            telemetry.addData("Status", "Running");
+            telemetry.update();
+*/
             idle();
         }
     }
+
+    double tgtPower = 0;
 
     /*
     private void moveMecanum(float Ch1, float Ch3, float Ch4) {
@@ -110,7 +125,6 @@ public class EasyJoysticks extends LinearOpMode {
 
         telemetry.addData("LF Power", leftFront.getPower());
 
-        // moar commit
     }
 */
 
