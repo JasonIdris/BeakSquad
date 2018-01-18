@@ -77,12 +77,12 @@ public class VuforiaAuton extends LinearOpMode {
                 drive(1,1,1,1);
 
             }
-
+            //Vumark is now out of sight because of proximity to cryptobox.
             gamepadDrive(0,0,1);
             sleep(1000);
             gamepadDrive(0,0,0);
+            //Robot is facing thing
 
-            //Vumark is now out of sight because of proximity to red thing.
 
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
