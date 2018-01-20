@@ -18,16 +18,29 @@ public class JewelRed extends LinearOpMode {
     private Servo armServo;
     private ColorType activatedColor;
 
+    private DcMotor leftFront;
+    private DcMotor leftBack;
+    private DcMotor rightFront;
+    private DcMotor rightBack;
+
     private double[] reds = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     private double[] blues = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
     @Override
     public void runOpMode() throws InterruptedException {
         colorSensor = hardwareMap.colorSensor.get("color");
+        armServo = hardwareMap.servo.get("arm");
+
+        leftFront = hardwareMap.dcMotor.get(UniversalConstants.LEFT1NAME);
+        leftBack = hardwareMap.dcMotor.get(UniversalConstants.LEFT2NAME);
+        rightFront = hardwareMap.dcMotor.get(UniversalConstants.RIGHT1NAME);
+        rightBack = hardwareMap.dcMotor.get(UniversalConstants.RIGHT2NAME);
 
         waitForStart();
 
         while (opModeIsActive()) {
+            armServo.setPosition(0.5);
+
             Double red_sum = 0.0;
             Double blue_sum = 0.0;
             for (int i = reds.length-1; i > 0; i--) {
@@ -56,10 +69,20 @@ public class JewelRed extends LinearOpMode {
             if (identifier >= 0.4) {
                 //Red
                 activatedColor = ColorType.Red;
+
+                gamepadDrive(0, 0, 1);
+                sleep(500);
+                gamepadDrive(0,0,0);
+
             } else if (identifier <= 0.15) {
                 //Blue
                 activatedColor = ColorType.Blue;
+                gamepadDrive(0, 0,-1);
+                sleep(500);
+                gamepadDrive(0,0,0);
+
             } else {
+
                 activatedColor = ColorType.Unknown;
             }
             telemetry.addData("Activated Color", activatedColor);
@@ -67,6 +90,27 @@ public class JewelRed extends LinearOpMode {
             
             idle();
         }
+    }
+
+    private void gamepadDrive(double leftX, double leftY, double rightX) {
+
+        double DEADZONE = 0.05;
+
+        double Ch3 = rightX;
+        double Ch1 = -leftY;
+        double Ch4 = leftX;
+
+        double FrontLeft = Ch3 + Ch1 + Ch4;
+        double RearLeft = Ch3 + Ch1 - Ch4;
+        double RearRight = Ch3 - Ch1 - Ch4;
+        double FrontRight = Ch3 - Ch1 + Ch4;
+
+
+        //ADD DEADZONE
+        leftFront.setPower(java.lang.Math.abs(FrontLeft) > DEADZONE ? FrontLeft : 0);
+        leftBack.setPower(java.lang.Math.abs(RearLeft) > DEADZONE ? RearLeft : 0);
+        rightFront.setPower(java.lang.Math.abs(FrontRight) > DEADZONE ? FrontRight : 0);
+        rightBack.setPower(java.lang.Math.abs(RearRight) > DEADZONE ? RearRight : 0);
     }
 }
 
