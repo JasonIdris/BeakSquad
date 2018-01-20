@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name = "Jewel Red Autonomous")
 public class JewelRed extends LinearOpMode {
-
+//TEST
     private ColorSensor colorSensor;
     private Servo armServo;
     private ColorType activatedColor;
