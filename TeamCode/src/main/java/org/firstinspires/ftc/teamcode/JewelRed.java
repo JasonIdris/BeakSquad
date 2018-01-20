@@ -18,8 +18,8 @@ public class JewelRed extends LinearOpMode {
     private Servo armServo;
     private ColorType activatedColor;
 
-    private Double[] reds = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-    private Double[] blues = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    private double[] reds = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    private double[] blues = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -28,8 +28,8 @@ public class JewelRed extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            Double red_sum = 0;
-            Double blue_sum = 0;
+            Double red_sum = 0.0;
+            Double blue_sum = 0.0;
             for (int i = reds.length-1; i > 0; i--) {
                 reds[i] = reds[i - 1];
                 red_sum += reds[i];
@@ -41,8 +41,8 @@ public class JewelRed extends LinearOpMode {
             telemetry.addData("Green", colorSensor.green());
             telemetry.addData("Blue", colorSensor.blue());
             
-            reds[0] = (Double) colorSensor.red();
-            blues[0] = ((Double) colorSensor.blue());
+            reds[0] = ((double) colorSensor.red());
+            blues[0] = ((double) colorSensor.blue());
 
             red_sum += reds[0];
             blue_sum += blues[0];
@@ -51,7 +51,7 @@ public class JewelRed extends LinearOpMode {
             telemetry.addData("RED_AVG", red_avg);
             telemetry.addData("BLUE_AVG", blue_avg);
             
-            private Double identifier = (red_avg-blue_avg) / red_avg;
+            Double identifier = (red_avg-blue_avg) / red_avg;
             
             if (identifier >= 0.4) {
                 //Red
