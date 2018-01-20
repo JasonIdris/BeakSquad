@@ -40,8 +40,8 @@ public class JewelRed extends LinearOpMode {
             telemetry.addData("Red", colorSensor.red());
             telemetry.addData("Green", colorSensor.green());
             telemetry.addData("Blue", colorSensor.blue());
-
-            reds[0] = ((Double) colorSensor.red());
+            
+            reds[0] = (Double) colorSensor.red();
             blues[0] = ((Double) colorSensor.blue());
 
             red_sum += reds[0];
